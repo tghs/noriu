@@ -1,7 +1,7 @@
 {
 	"name": "rerequire",
 	"version": "",
-	"description": "A version of require() that replaces the cached version of the module with the current version if it has changed since the module was last loaded.",
+	"description": "A wrapper for Node.js' require() with cache invalidation.",
 	"keywords": [
 		"require",
 		"cache",
