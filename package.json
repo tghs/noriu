@@ -1,0 +1,22 @@
+{
+	"name": "rerequire",
+	"version": "",
+	"description": "A version of require() that replaces the cached version of the module with the current version if it has changed since the module was last loaded.",
+	"keywords": [
+		"require",
+		"cache",
+		"changed",
+		"module"
+	],
+	"main": "index",
+	"dependencies": {},
+	"devDependencies": {
+		"touch": "0.0.x",
+		"cp": "0.1.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/tghs/rerequire"
+	},
+	"license": "MIT"
+}
