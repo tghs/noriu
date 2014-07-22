@@ -17,7 +17,9 @@ function callback() {
 
 ## Installation
 
-TODO
+```sh
+$ npm install noriu
+```
 
 ## Development
 
