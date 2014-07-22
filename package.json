@@ -1,5 +1,5 @@
 {
-	"name": "rerequire",
+	"name": "noriu",
 	"version": "",
 	"description": "A wrapper for Node.js' require() with cache invalidation.",
 	"keywords": [
@@ -16,7 +16,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/tghs/rerequire"
+		"url": "git://github.com/tghs/noriu"
 	},
 	"license": "MIT"
 }

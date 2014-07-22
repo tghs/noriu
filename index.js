@@ -1,1 +1,1 @@
-module.exports = require('./rerequire')
+module.exports = require('./noriu')

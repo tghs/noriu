@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-var cache_mtime_property_name = '_rerequire_mtime'
+var cache_mtime_property_name = '_noriu_mtime'
 
 module.exports= function(module_name) {
 	var full_module_name = module_name
@@ -10,7 +10,7 @@ module.exports= function(module_name) {
 		// If we use a relative path, the require would be evaluated relative to this module!
 		// To get around this, we make it an absolute path
 		full_module_name = process.env['PWD'] + '/' + module_name
-		// FIXME This probably doesn't work if rerequire is a grandchild dependency
+		// FIXME This probably doesn't work if noriu is a grandchild dependency
 	}
 	
 	var module = require.resolve(full_module_name)

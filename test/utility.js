@@ -26,7 +26,7 @@ exports.deleteModule = function (mod_name) {
 	}
 }
 
-exports.testAfterRequire = function (rerequire, test, target_prefix) {
+exports.testAfterRequire = function (noriu, test, target_prefix) {
 	var touch_time = new Date()
 	
 	exports.copyModule('target_1', 'target', touch_time)
@@ -42,9 +42,9 @@ exports.testAfterRequire = function (rerequire, test, target_prefix) {
 	exports.copyModule('target_2', 'target', touch_time)
 	var target_2 = null
 	if (target_prefix === undefined) {
-		target_2 = rerequire(target_prefix + 'target')
+		target_2 = noriu(target_prefix + 'target')
 	} else {
-		target_2 = rerequire(target_prefix + test_module('target'))
+		target_2 = noriu(target_prefix + test_module('target'))
 	}
 	test.ok(target_2.target_2)
 	test.ok(! target_2.target_1)
@@ -52,16 +52,16 @@ exports.testAfterRequire = function (rerequire, test, target_prefix) {
 	test.done()
 }
 
-exports.testChanged = function (rerequire, test, target_prefix) {
+exports.testChanged = function (noriu, test, target_prefix) {
 	var touch_time_1 = new Date()
 	var touch_time_2 = touch_time_1 + 10
 	
 	exports.copyModule('target_1', 'target', touch_time_2)
 	var target_1 = null
 	if (target_prefix === undefined) {
-		target_1 = rerequire('target')
+		target_1 = noriu('target')
 	} else {
-		target_1 = rerequire(target_prefix + test_module('target'))
+		target_1 = noriu(target_prefix + test_module('target'))
 	}
 	test.ok(target_1.target_1)
 	test.ok(! target_1.target_2)
@@ -69,9 +69,9 @@ exports.testChanged = function (rerequire, test, target_prefix) {
 	exports.copyModule('target_2', 'target', touch_time_2)
 	var target_2 = null
 	if (target_prefix === undefined) {
-		target_2 = rerequire(target_prefix + 'target')
+		target_2 = noriu(target_prefix + 'target')
 	} else {
-		target_2 = rerequire(target_prefix + test_module('target'))
+		target_2 = noriu(target_prefix + test_module('target'))
 	}
 	test.ok(target_2.target_2)
 	test.ok(! target_2.target_1)
@@ -79,15 +79,15 @@ exports.testChanged = function (rerequire, test, target_prefix) {
 	test.done()
 }
 
-exports.testUnchanged = function (rerequire, test, target_prefix) {
+exports.testUnchanged = function (noriu, test, target_prefix) {
 	var touch_time = new Date()
 	
 	exports.copyModule('target_1', 'target', touch_time)
 	var target_1 = null
 	if (target_prefix === undefined) {
-		target_1 = rerequire('target')
+		target_1 = noriu('target')
 	} else {
-		target_1 = rerequire(target_prefix + test_module('target'))
+		target_1 = noriu(target_prefix + test_module('target'))
 	}
 	test.ok(target_1.target_1)
 	test.ok(! target_1.target_2)
@@ -95,9 +95,9 @@ exports.testUnchanged = function (rerequire, test, target_prefix) {
 	exports.copyModule('target_2', 'target', touch_time)
 	var target_2 = null
 	if (target_prefix === undefined) {
-		target_2 = rerequire(target_prefix + 'target') // TODO fix these
+		target_2 = noriu(target_prefix + 'target') // TODO fix these
 	} else {
-		target_2 = rerequire(target_prefix + test_module('target'))
+		target_2 = noriu(target_prefix + test_module('target'))
 	}
 	test.ok(target_2.target_1)
 	test.ok(! target_2.target_2)
@@ -107,9 +107,9 @@ exports.testUnchanged = function (rerequire, test, target_prefix) {
 
 // Testing errors
 
-exports.testErrorInvalidModule = function (rerequire, test, target_prefix) {
+exports.testErrorInvalidModule = function (noriu, test, target_prefix) {
 	try {
-		rerequire(target_prefix + '_rerequire_nonexistent_module')
+		noriu(target_prefix + '_noriu_nonexistent_module')
 		test.fail()
 	} catch (err) {
 		// TODO compare with require()'s return
@@ -121,15 +121,15 @@ exports.testErrorInvalidModule = function (rerequire, test, target_prefix) {
 	test.done()
 }
 
-exports.testErrorCachedDeletedAfterRequire = function (rerequire, test, target_prefix) {
+exports.testErrorCachedDeletedAfterRequire = function (noriu, test, target_prefix) {
 	exports.copyModule('target_1', 'target', new Date())
 	var mod_1 = require(target_prefix + test_module('target'))
 	
 	exports.deleteModule('target')
 	try {
-		var mod_2 = rerequire(target_prefix + test_module('target'))
+		var mod_2 = noriu(target_prefix + test_module('target'))
 		
-		// require() gets here, but rerequire() shouldn't
+		// require() gets here, but noriu() shouldn't
 		test.fail()
 	 } catch (err) {
 		if (err.code !== 'MODULE_NOT_FOUND') {
@@ -140,15 +140,15 @@ exports.testErrorCachedDeletedAfterRequire = function (rerequire, test, target_p
 	test.done()
 }
 
-exports.testErrorCachedDeletedAfterRerequire = function (rerequire, test, target_prefix) {
+exports.testErrorCachedDeletedAfternoriu = function (noriu, test, target_prefix) {
 	exports.copyModule('target_1', 'target', new Date())
-	var mod_1 = rerequire(target_prefix + test_module('target'))
+	var mod_1 = noriu(target_prefix + test_module('target'))
 	
 	exports.deleteModule('target')
 	try {
-		var mod_2 = rerequire(target_prefix + test_module('target'))
+		var mod_2 = noriu(target_prefix + test_module('target'))
 		
-		// require() gets here, but rerequire() shouldn't
+		// require() gets here, but noriu() shouldn't
 		test.fail()
 	 } catch (err) {
 		if (err.code !== 'MODULE_NOT_FOUND') {

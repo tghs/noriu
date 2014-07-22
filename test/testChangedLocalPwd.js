@@ -1,6 +1,6 @@
-var rerequire = require('rerequire')
+var noriu = require('noriu')
 var utility = require('./utility')
 
 exports.test = function (test) {
-	return utility.testChanged(rerequire, test, './')
+	return utility.testChanged(noriu, test, './')
 }
