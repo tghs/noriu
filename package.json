@@ -1,6 +1,6 @@
 {
 	"name": "noriu",
-	"version": "",
+	"version": "0.1.0",
 	"description": "A wrapper for Node.js' require() with cache invalidation.",
 	"keywords": [
 		"require",
