@@ -12,7 +12,7 @@ module.exports= function(module_name) {
 		full_module_name = process.env['PWD'] + '/' + module_name
 		// FIXME This probably doesn't work if rerequire is a grandchild dependency
 	}
-
+	
 	var module = require.resolve(full_module_name)
 	// Throws 'MODULE_NOT_FOUND'
 	
@@ -29,10 +29,10 @@ module.exports= function(module_name) {
 	}
 	
 	var module_timestamp = module_stat.mtime.getTime()
-
+	
 	if (module in require.cache) {
 		var cache_timestamp = require.cache[module][cache_mtime_property_name]
-
+		
 		if (module_timestamp != cache_timestamp) {
 			delete require.cache[module]
 		}

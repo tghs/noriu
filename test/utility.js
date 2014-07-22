@@ -28,7 +28,7 @@ exports.deleteModule = function (mod_name) {
 
 exports.testAfterRequire = function (rerequire, test, target_prefix) {
 	var touch_time = new Date()
-
+	
 	exports.copyModule('target_1', 'target', touch_time)
 	var target_1 = null
 	if (target_prefix === undefined) {
@@ -38,7 +38,7 @@ exports.testAfterRequire = function (rerequire, test, target_prefix) {
 	}
 	test.ok(target_1.target_1)
 	test.ok(! target_1.target_2)
-
+	
 	exports.copyModule('target_2', 'target', touch_time)
 	var target_2 = null
 	if (target_prefix === undefined) {
@@ -48,14 +48,14 @@ exports.testAfterRequire = function (rerequire, test, target_prefix) {
 	}
 	test.ok(target_2.target_2)
 	test.ok(! target_2.target_1)
-
+	
 	test.done()
 }
 
 exports.testChanged = function (rerequire, test, target_prefix) {
 	var touch_time_1 = new Date()
 	var touch_time_2 = touch_time_1 + 10
-
+	
 	exports.copyModule('target_1', 'target', touch_time_2)
 	var target_1 = null
 	if (target_prefix === undefined) {
@@ -65,7 +65,7 @@ exports.testChanged = function (rerequire, test, target_prefix) {
 	}
 	test.ok(target_1.target_1)
 	test.ok(! target_1.target_2)
-
+	
 	exports.copyModule('target_2', 'target', touch_time_2)
 	var target_2 = null
 	if (target_prefix === undefined) {
@@ -75,13 +75,13 @@ exports.testChanged = function (rerequire, test, target_prefix) {
 	}
 	test.ok(target_2.target_2)
 	test.ok(! target_2.target_1)
-
+	
 	test.done()
 }
 
 exports.testUnchanged = function (rerequire, test, target_prefix) {
 	var touch_time = new Date()
-
+	
 	exports.copyModule('target_1', 'target', touch_time)
 	var target_1 = null
 	if (target_prefix === undefined) {
@@ -91,7 +91,7 @@ exports.testUnchanged = function (rerequire, test, target_prefix) {
 	}
 	test.ok(target_1.target_1)
 	test.ok(! target_1.target_2)
-
+	
 	exports.copyModule('target_2', 'target', touch_time)
 	var target_2 = null
 	if (target_prefix === undefined) {
@@ -101,7 +101,7 @@ exports.testUnchanged = function (rerequire, test, target_prefix) {
 	}
 	test.ok(target_2.target_1)
 	test.ok(! target_2.target_2)
-
+	
 	test.done()
 }
 
@@ -136,7 +136,7 @@ exports.testErrorCachedDeletedAfterRequire = function (rerequire, test, target_p
 			test.fail()
 		}
 	}
-
+	
 	test.done()
 }
 
@@ -155,7 +155,7 @@ exports.testErrorCachedDeletedAfterRerequire = function (rerequire, test, target
 			test.fail()
 		}
 	}
-
+	
 	test.done()
 }
 
