@@ -7,7 +7,7 @@ The Node.js runtime caches modules as you <tt>require()</tt> them. This is not a
 ## Usage
 
 ```js
-var rerequire = require('rerequire').rerequire
+var rerequire = require('rerequire')
 
 function callback() {
 	var http = rerequire('http')

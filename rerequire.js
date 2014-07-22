@@ -2,7 +2,7 @@ var fs = require('fs')
 
 var cache_mtime_property_name = '_rerequire_mtime'
 
-exports.rerequire = function(filename) {
+module.exports= function(filename) {
 	var module_name = filename
 	var start = filename.substring(0, 2)
 	if (start === './' || start === '..') {

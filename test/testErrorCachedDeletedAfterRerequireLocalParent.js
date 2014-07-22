@@ -1,4 +1,4 @@
-var rerequire = require('rerequire').rerequire
+var rerequire = require('rerequire')
 var utility = require('./utility')
 
 exports.test = function (test) {
