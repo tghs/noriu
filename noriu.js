@@ -16,32 +16,40 @@ module.exports= function(module_name) {
 	var module = require.resolve(full_module_name)
 	// Throws 'MODULE_NOT_FOUND'
 	
-	try {
-		var module_stat = fs.statSync(module)
-	} catch (err) {
-		if (err.code === 'ENOENT') {
-			// Cached entry in module path table still exists
-			// But it's been deleted
-			var e = new Error('Error: Cannot find module \'' + module_name + '\'')
-			e.code = 'MODULE_NOT_FOUND'
-			throw e
+	var module_ref = null
+	
+	if (module.substring(0, 1) === '/') {
+		// Cachable module
+		try {
+			var module_stat = fs.statSync(module)
+		} catch (err) {
+			if (err.code === 'ENOENT') {
+				// Cached entry in module path table still exists
+				// But it's been deleted
+				var e = new Error('Error: Cannot find module \'' + module_name + '\'')
+				e.code = 'MODULE_NOT_FOUND'
+				throw e
+			}
 		}
-	}
-	
-	var module_timestamp = module_stat.mtime.getTime()
-	
-	if (module in require.cache) {
-		var cache_timestamp = require.cache[module][cache_mtime_property_name]
 		
-		if (module_timestamp != cache_timestamp) {
-			delete require.cache[module]
+		var module_timestamp = module_stat.mtime.getTime()
+		
+		if (module in require.cache) {
+			var cache_timestamp = require.cache[module][cache_mtime_property_name]
+			
+			if (module_timestamp != cache_timestamp) {
+				delete require.cache[module]
+			}
 		}
+		
+		module_ref = require(full_module_name)
+		
+		// Add our property to track modification time
+		require.cache[module][cache_mtime_property_name] = module_timestamp
+	} else {
+		// Standard library module
+		module_ref = require(full_module_name)
 	}
-	
-	var module_ref = require(full_module_name)
-	
-	// Add our property to track modification time
-	require.cache[module][cache_mtime_property_name] = module_timestamp
 	
 	return module_ref
 }
