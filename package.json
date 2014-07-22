@@ -11,8 +11,8 @@
 	"main": "index",
 	"dependencies": {},
 	"devDependencies": {
-		"touch": "0.0.x",
-		"cp": "0.1.x"
+		"touch": "*",
+		"cp": "*"
 	},
 	"repository": {
 		"type": "git",
