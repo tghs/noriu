@@ -2,17 +2,18 @@ var fs = require('fs')
 
 var cache_mtime_property_name = '_rerequire_mtime'
 
-module.exports= function(filename) {
-	var module_name = filename
-	var start = filename.substring(0, 2)
+module.exports= function(module_name) {
+	var full_module_name = module_name
+	
+	var start = module_name.substring(0, 2)
 	if (start === './' || start === '..') {
 		// If we use a relative path, the require would be evaluated relative to this module!
 		// To get around this, we make it an absolute path
-		module_name = process.env['PWD'] + '/' + filename
+		full_module_name = process.env['PWD'] + '/' + module_name
 		// FIXME This probably doesn't work if rerequire is a grandchild dependency
 	}
 
-	var module = require.resolve(module_name)
+	var module = require.resolve(full_module_name)
 	// Throws 'MODULE_NOT_FOUND'
 	
 	try {
@@ -37,7 +38,7 @@ module.exports= function(filename) {
 		}
 	}
 	
-	var module_ref = require(process.env['PWD'] + '/' + filename)
+	var module_ref = require(full_module_name)
 	
 	// Add our property to track modification time
 	require.cache[module][cache_mtime_property_name] = module_timestamp
