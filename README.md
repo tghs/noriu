@@ -6,7 +6,7 @@ The Node.js runtime caches modules as you <tt>require()</tt> them. This is not a
 
 ## Usage
 
-```
+```js
 var rerequire = require('rerequire').rerequire
 
 function callback() {
@@ -21,7 +21,7 @@ TODO
 
 ## Development
 
-```
+```sh
 $ npm install -g nodeunit
 $ ./test.sh
 ```
