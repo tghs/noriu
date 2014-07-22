@@ -140,7 +140,7 @@ exports.testErrorCachedDeletedAfterRequire = function (noriu, test, target_prefi
 	test.done()
 }
 
-exports.testErrorCachedDeletedAfternoriu = function (noriu, test, target_prefix) {
+exports.testErrorCachedDeletedAfterNoriu = function (noriu, test, target_prefix) {
 	exports.copyModule('target_1', 'target', new Date())
 	var mod_1 = noriu(target_prefix + test_module('target'))
 	
